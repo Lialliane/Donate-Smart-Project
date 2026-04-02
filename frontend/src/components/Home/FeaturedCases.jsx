@@ -81,9 +81,9 @@ export function FeaturedCases() {
               Array.from({ length: 3 }).map((_, i) => (
                 <CourseDetailSkeleton key={i} />
               ))
-            ): cases.map((caseItem) => (
+            ): (cases)? cases.map((caseItem) => (
           <CaseCard caseItem={caseItem} buttonText={"Donate Now"} />
-        ))}
+        )) : null }
       </div>
 
       <div className="text-center mt-12">
