@@ -86,7 +86,10 @@ export function AllCases() {
         //console.log(res.data);
         if(currentUser && currentUser.role !== "admin")
           activeCases = res.data.filter(c => c.donations < c.goal);
-        setCases(activeCases || allCasesDummy);
+        if(!activeCases || activeCases.length === 0)
+          setCases(allCasesDummy);
+        else
+          setCases(activeCases);
       } catch (err) {
         console.error("Error fetching cases:", err.response, err.response?.data || err.message);
       }
@@ -162,7 +165,7 @@ export function AllCases() {
           {loading ? (
             Array.from({ length: 6 }).map((_, i) => (
               <CourseDetailSkeleton key={i} />
-            ))) : filteredCases.length > 0 ?
+            ))) : (filteredCases) && Array.isArray(filteredCases) && filteredCases.length > 0 ?
             (filteredCases
               .slice(0, visibleCount)
               .map((caseItem) => (

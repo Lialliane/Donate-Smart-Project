@@ -29,11 +29,6 @@ import "aos/dist/aos.css";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 
-
-
-
-
-
 function App() {
 
   useEffect(() => {

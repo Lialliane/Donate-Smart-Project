@@ -52,10 +52,13 @@ export function FeaturedCases() {
     const fetchCases = async () => {
       try {
         const res = await axios.get("/api/cases");
+        if(!res.data || res.data.length === 0)
+          setCases(dummycases);
         if(res.data && res.data.length < 3)
           setCases(dummycases);
         else
           setCases(res.data.slice(0 , 3));
+        console.log(cases);
       } catch (err) {
         console.error("Error fetching cases:", err.response?.data || err.message);
       }
@@ -81,7 +84,7 @@ export function FeaturedCases() {
               Array.from({ length: 3 }).map((_, i) => (
                 <CourseDetailSkeleton key={i} />
               ))
-            ): (cases)? cases.map((caseItem) => (
+            ): (cases) && Array.isArray(cases)?  cases.map((caseItem) => (
           <CaseCard caseItem={caseItem} buttonText={"Donate Now"} />
         )) : null }
       </div>
