@@ -1,4 +1,5 @@
 _This is the graduation project of ASAC Advanced Javascipt Training._
+[original link](https://github.com/Donate-Smart)
 
 # Donate Smart
 
@@ -14,7 +15,7 @@ DonateSmart is an AI-powered donation platform that connects donors with verifie
 - Admins can approve, edit, or delete cases.
 - Gemini API handles text summarization.
 
-![Main](./img.png)
+![Main](./frontend/img.png)
 
 ### Running
 
