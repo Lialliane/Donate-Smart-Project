@@ -9,6 +9,76 @@ import CaseDetailSkeleton from "../components/Skeleton/CaseDetail/CaseDetailSkel
 import { CaseCard } from "../components/Common/CaseCard";
 
 
+const allCasesDummy = [
+  {
+    _id: 1,
+    title: 'Education for Underprivileged Children',
+    description: 'Help provide books, supplies, and educational resources to children in rural communities.',
+    category: 'Education',
+    image: 'photo1.jpg',
+    donations: 12500,
+    goal: 20000,
+    status: "approved",
+    summary: "Help provide books, supplies, and educational resources to children in rural communities who lack access to quality education."
+  },
+  {
+    _id: 2,
+    title: 'Clean Water Access Initiative',
+    description: 'Build wells and water filtration systems to provide clean drinking water.',
+    category: 'Health',
+    image: 'photo2.jpg',
+    donations: 8300,
+    goal: 15000,
+    status: "approved",
+    summary: "Build wells and water filtration systems to provide clean drinking water to communities in need."
+  },
+  {
+    _id: 3,
+    title: 'Medical Support for Families',
+    description: 'Support families facing medical emergencies with treatment costs and medications.',
+    category: 'Medical',
+    image: 'photo3.jpg',
+    donations: 18700,
+    goal: 25000,
+    status: "approved",
+    summary: "Support families facing medical emergencies with treatment costs and medications."
+  },
+  {
+    _id: 4,
+    title: 'Community Food Program',
+    description: 'Provide nutritious meals to families struggling with food insecurity.',
+    category: 'Food',
+    image: 'photo4.jpg',
+    donations: 5200,
+    goal: 10000,
+    status: "approved",
+    summary: "Provide nutritious meals to families struggling with food insecurity."
+  },
+  {
+    _id: 5,
+    title: 'Disaster Relief Fund',
+    description: 'Emergency assistance for communities affected by natural disasters.',
+    category: 'Emergency',
+    image: 'photo5.jpg',
+    donations: 28500,
+    goal: 50000,
+    status: "approved",
+    summary: "Emergency assistance for communities affected by natural disasters."
+  },
+  {
+    _id: 6,
+    title: 'Senior Care Support',
+    description: 'Helping elderly individuals with healthcare, daily needs, and companionship.',
+    category: 'Health',
+    image: 'photo6.jpg',
+    donations: 15800,
+    goal: 30000,
+    status: "approved",
+    summary: "Helping elderly individuals with healthcare, daily needs, and companionship."
+  },
+];
+
+
 export default function CaseDetails() {
   const { id } = useParams();
   const [caseData, setCaseData] = useState(null);
@@ -17,6 +87,8 @@ export default function CaseDetails() {
   const [loadingSimilar, setLoadingSimilar] = useState(true);
   const currentUser = useSelector((state) => state.user.currentUser);
   console.log(JSON.stringify(currentUser));
+  console.log(id);
+  
 
   const navigate = useNavigate();
 
@@ -37,9 +109,13 @@ export default function CaseDetails() {
     const fetchCase = async () => {
       try {
         const res = await axios.get(`/api/cases/${id}`);
-        setCaseData(res.data);
+        if(!res.data)
+            setCaseData(allCasesDummy.find(c => c._id === parseInt(id)) || allCasesDummy[0]);
+        else
+          setCaseData(res.data);
         console.log(res.data);
       } catch (err) {
+        setCaseData(allCasesDummy.find(c => c._id === parseInt(id)) || allCasesDummy[0]);
         console.error(
           "Error fetching case:",
           err.response?.data || err.message
@@ -114,7 +190,7 @@ export default function CaseDetails() {
   }
 
   const imageSrc = caseData.image
-    ? `https://donate-smart-project.onrender.com/${caseData.image}`
+    ? `https://donate-smart-project.onrender.com/uploads/${caseData.image}`
     : "https://via.placeholder.com/900x300?text=No+Image";
 
   console.log(caseData);
@@ -228,7 +304,7 @@ export default function CaseDetails() {
         </h3>
         <div className="grid px-10 sm:px-0 md:grid-cols-3 gap-8 mt-6">
           
-        {loading? (
+        {loadingSimilar? (
               Array.from({ length: 3 }).map((_, i) => (
                 <CaseDetailSkeleton key={i} />
               ))

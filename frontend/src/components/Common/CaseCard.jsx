@@ -29,7 +29,7 @@ export function CaseCard({ caseItem, buttonText }) {
           {/* Image */}
           <div className="relative h-44 md:h-1/2 lg:h-48 overflow-hidden">
             <ImageWithFallback
-              src={`https://donate-smart-project.onrender.com/${caseItem.image}`}
+              src={`https://donate-smart-project.onrender.com/uploads/${caseItem.image}`}
               alt={caseItem.title}
               className="w-full h-full object-cover"
             />
@@ -91,9 +91,11 @@ export function CaseCard({ caseItem, buttonText }) {
           : "text-gray-400 border-gray-300"
       }`}
   >
-    {currentUser?.role === "admin"
-      ? "Admin view — donations disabled."
-      : "You created this case"}
+    {currentUser && currentUser?.role === "admin"
+      ? "Admin view — donations disabled." : 
+    currentUser && currentUser?._id === caseItem?.createdBy ? 
+      "Your case — donations disabled." :  
+        "Please login to donate."}
   </div>
 )
 
