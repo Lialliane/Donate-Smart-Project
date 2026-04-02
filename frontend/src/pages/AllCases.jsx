@@ -86,7 +86,7 @@ export function AllCases() {
         //console.log(res.data);
         if(currentUser && currentUser.role !== "admin")
           activeCases = res.data.filter(c => c.donations < c.goal);
-        if(activeCases && activeCases.length === 0)
+        if(!activeCases || activeCases.length === 0)
           setCases(allCasesDummy);
         else
           setCases(activeCases);

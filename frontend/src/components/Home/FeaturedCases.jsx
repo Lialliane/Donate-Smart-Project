@@ -52,11 +52,12 @@ export function FeaturedCases() {
     const fetchCases = async () => {
       try {
         const res = await axios.get("/api/cases");
-        if(res.data && res.data.length < 3)
+        if(res.data && res.data.length === 0)
+          setCases(dummycases);
+        else if(res.data && res.data.length < 3)
           setCases(dummycases);
         else
           setCases(res.data.slice(0 , 3));
-        console.log(cases);
       } catch (err) {
         setCases(dummycases);
         console.error("Error fetching cases:", err.response?.data || err.message);
