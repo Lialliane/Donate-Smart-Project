@@ -1,7 +1,7 @@
 _This is the graduation project of ASAC Advanced Javascipt Training._
-[original link](https://github.com/Donate-Smart)
+[original repo](https://github.com/Donate-Smart)
 
-# Donate Smart
+# [Donate Smart <small>🔗 </small>](https://donate-smart.netlify.app)
 
 ### Description
 
