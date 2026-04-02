@@ -29,7 +29,7 @@ export function CaseCard({ caseItem, buttonText }) {
           {/* Image */}
           <div className="relative h-44 md:h-1/2 lg:h-48 overflow-hidden">
             <ImageWithFallback
-              src={`http://localhost:5000/uploads/${caseItem.image}`}
+              src={`https://donate-smart-project.onrender.com/${caseItem.image}`}
               alt={caseItem.title}
               className="w-full h-full object-cover"
             />
@@ -104,3 +104,5 @@ export function CaseCard({ caseItem, buttonText }) {
     </div>
   );
 }
+
+

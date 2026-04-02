@@ -114,7 +114,7 @@ export default function CaseDetails() {
   }
 
   const imageSrc = caseData.image
-    ? `http://localhost:5000/uploads/${caseData.image}`
+    ? `https://donate-smart-project.onrender.com/${caseData.image}`
     : "https://via.placeholder.com/900x300?text=No+Image";
 
   console.log(caseData);
