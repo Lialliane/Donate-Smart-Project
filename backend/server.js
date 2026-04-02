@@ -18,7 +18,7 @@ import googleAuthRoutes from "./routes/googleRoutes.js";
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: "https://donate-smart.netlify.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));

@@ -22,7 +22,7 @@ router.get(
       { expiresIn: "7d" }
     );
 
-    res.redirect(`http://localhost:3000/google-success?token=${token}`);
+    res.redirect(`https://donate-smart.netlify.app/google-success?token=${token}`);
   }
 );
 
