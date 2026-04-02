@@ -20,6 +20,8 @@ export default function AdminPanel() {
   const [rejectedCases, setRejectedCases] = useState([]);
   const [donations, setDonations] = useState([]);
 
+  const API = process.env.REACT_APP_API_URL || '';
+
   // حماية الأدمن
   useEffect(() => {
     if (!currentUser || currentUser.role !== "admin") navigate("/");
@@ -29,7 +31,7 @@ export default function AdminPanel() {
   useEffect(() => {
     const fetchAnalytics = async () => {
       try {
-        const res = await axios.get("/api/admin/analytics", {
+        const res = await axios.get(`${API}/api/admin/analytics`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setAnalytics(res.data || null);
@@ -44,7 +46,7 @@ export default function AdminPanel() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("/api/admin/users", {
+        const res = await axios.get(`${API}/api/admin/users`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(res.data || []);
@@ -60,7 +62,7 @@ export default function AdminPanel() {
   useEffect(() => {
     const fetchPendingCases = async () => {
       try {
-        const res = await axios.get("/api/admin/pending-cases", {
+        const res = await axios.get(`${API}/api/admin/pending-cases`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPendingCases(res.data || []);
@@ -76,7 +78,7 @@ export default function AdminPanel() {
   useEffect(() => {
     const fetchDonations = async () => {
       try {
-        const res = await axios.get("/api/admin/donations", {
+        const res = await axios.get(`${API}/api/admin/donations`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setDonations(res.data || []);
@@ -93,8 +95,8 @@ export default function AdminPanel() {
     try {
       const endpoint =
         newStatus === "approved"
-          ? `/api/admin/approve-case/${id}`
-          : `/api/admin/reject-case/${id}`;
+          ? `${API}/api/admin/approve-case/${id}`
+          : `${API}/api/admin/reject-case/${id}`;
 
       await axios.put(
         endpoint,
@@ -126,7 +128,7 @@ export default function AdminPanel() {
   // حذف الحالة
   const deleteCase = async (id) => {
     try {
-      await axios.delete(`/api/admin/delete-case/${id}`, {
+      await axios.delete(`${API}/api/admin/delete-case/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -146,7 +148,7 @@ export default function AdminPanel() {
     try {
       // toggle user
       await axios.patch(
-        `/api/admin/users/${id}/disable`,
+        `${API}/api/admin/users/${id}/disable`,
         { disabled: !currentUser },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -169,7 +171,7 @@ export default function AdminPanel() {
   const deleteUser = async (id) => {
     try {
       // delete user
-      await axios.delete(`/api/admin/users/${id}`, {
+      await axios.delete(`${API}/api/admin/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers((prev) => prev.filter((u) => u._id !== id));

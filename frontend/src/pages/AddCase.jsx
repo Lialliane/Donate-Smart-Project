@@ -155,9 +155,10 @@ export default function AddCase() {
     formData.append("category", category);
     formData.append("summary", summary);
     formData.append("image", image); // ✅ صار required من الـ validation
+    const API = process.env.REACT_APP_API_URL || '';
 
     try {
-      const res = await axios.post("/api/cases", formData, {
+      const res = await axios.post(`${API}/api/cases`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",

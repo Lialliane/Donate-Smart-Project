@@ -17,11 +17,12 @@ const ResetPassword = ({ token }) => {
   });
 
   const router = useNavigate();
+  const API = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        const res = await axios.post(`/api/forgot-password/verify-token`, {
+        const res = await axios.post(`${API}/api/forgot-password/verify-token`, {
           token,
         });
 
@@ -57,7 +58,7 @@ const ResetPassword = ({ token }) => {
     }
 
     try {
-      const res = await axios.post(`/api/auth`, {
+      const res = await axios.post(`${API}/api/auth`, {
         email: user?.email,
         password: data.newPassword,
       });

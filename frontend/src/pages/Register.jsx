@@ -7,6 +7,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const API = process.env.REACT_APP_API_URL || '';
 
   const navigate = useNavigate();
 
@@ -14,7 +15,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      await axios.post("api/auth/register", {
+      await axios.post(`${API}/api/auth/register`, {
         name,
         email,
         password,

@@ -6,6 +6,7 @@ import axios from "axios";
 export default function ContactUS() {
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.user.currentUser);
+  const API = process.env.REACT_APP_API_URL || '';
 
   const [formData, setFormData] = useState({
     firstname: "",
@@ -102,7 +103,7 @@ export default function ContactUS() {
 
     try {
       const res = await axios.post(
-        "/api/contact",
+        `${API}/api/contact`,
         formData
       );
 

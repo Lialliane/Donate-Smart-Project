@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 const SignUp = ({setIsSignInOpen, setIsSignUpOpen}) => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
+  const API = process.env.REACT_APP_API_URL || '';
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -18,7 +19,7 @@ const SignUp = ({setIsSignInOpen, setIsSignUpOpen}) => {
     const value = Object.fromEntries(data.entries())
     const finalData = { ...value }
 
-    await axios.post("api/auth/register", finalData)
+    await axios.post(`${API}/api/auth/register`, finalData)
     .then((res) => {
       toast.success('Successfully registered');
       setLoading(false)

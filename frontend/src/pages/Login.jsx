@@ -11,12 +11,13 @@ export default function Login() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const API = process.env.REACT_APP_API_URL || '';
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("/api/auth/login", {
+      const res = await axios.post(`${API}/api/auth/login`, {
         email,
         password,
       });

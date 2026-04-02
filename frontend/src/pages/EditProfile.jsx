@@ -17,6 +17,8 @@ export default function EditProfile() {
     name.trim() === currentUser?.name &&
     email.trim() === currentUser?.email;
 
+    const API = process.env.REACT_APP_API_URL || '';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,7 +40,7 @@ export default function EditProfile() {
       }
 
       const res = await axios.put(
-        "/api/auth/update",
+        `${API}/api/auth/update`,
         { name: name.trim(), email: email.trim() },
         { headers: { Authorization: `Bearer ${token}` } }
       );

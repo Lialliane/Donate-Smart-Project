@@ -86,8 +86,7 @@ export default function CaseDetails() {
   const [loading, setLoading] = useState(true);
   const [loadingSimilar, setLoadingSimilar] = useState(true);
   const currentUser = useSelector((state) => state.user.currentUser);
-  console.log(JSON.stringify(currentUser));
-  console.log(id);
+  const API = process.env.REACT_APP_API_URL || '';
   
 
   const navigate = useNavigate();
@@ -108,7 +107,7 @@ export default function CaseDetails() {
   useEffect(() => {
     const fetchCase = async () => {
       try {
-        const res = await axios.get(`/api/cases/${id}`);
+        const res = await axios.get(`${API}/api/cases/${id}`);
         if(!res.data)
             setCaseData(allCasesDummy.find(c => c._id === parseInt(id)) || allCasesDummy[0]);
         else
@@ -126,7 +125,7 @@ export default function CaseDetails() {
     };
     const getSimilar = async () => {
       try {
-        const res = await axios.get(`/api/cases/${id}/similar`);
+        const res = await axios.get(`${API}/api/cases/${id}/similar`);
         setSimilarCases(res.data);
         console.log(res.data);
       } catch (err) {

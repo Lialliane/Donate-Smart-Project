@@ -8,6 +8,7 @@ import { setUser } from "../../redux/userSlice";
 export default function GoogleSuccessHandler() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const API = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -16,7 +17,7 @@ export default function GoogleSuccessHandler() {
     if (token) {
       localStorage.setItem("token", token);
 
-      axios.get("/api/auth/me", {
+      axios.get(`${API}/api/auth/me`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => {

@@ -77,11 +77,12 @@ export function AllCases() {
   const [loading, setLoading] = useState(true)
   const [visibleCount, setVisibleCount] = useState(6);
   const currentUser = useSelector((state) => state.user.currentUser);
+  const API = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
     const fetchCases = async () => {
       try {
-        const res = await axios.get("/api/cases");
+        const res = await axios.get(`${API}/api/cases`);
         let activeCases = res.data;
         console.log(res.data);
         if(currentUser && currentUser.role !== "admin")

@@ -7,6 +7,7 @@ import Loader from "../../Common/Loader";
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [loader, setLoader] = useState(false);
+  const API = process.env.REACT_APP_API_URL || '';
 
   //TODO: check if forget password works properly
 
@@ -22,7 +23,7 @@ const ForgotPassword = () => {
     setLoader(true);
 
     try {
-      const res = await axios.post("/api/auth/", {
+      const res = await axios.post(`${API}/api/auth/`, {
         email: email.toLowerCase(),
       });
 

@@ -8,11 +8,12 @@ function PaymentSuccess() {
   const [params] = useSearchParams();
   const sessionId = params.get("session_id");
   const navigate = useNavigate();
+  const API = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
     const fetchCase = async () => {
       try {
-        const res = await axios.get(`/api/payment/session/${sessionId}`);
+        const res = await axios.get(`${API}/api/payment/session/${sessionId}`);
         setSession(res.data);
         console.log(res.data);
       } catch (err) {

@@ -35,6 +35,7 @@ export function DonatePage() {
   const [caseData, setCaseData] = useState(dummyData);
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.user.currentUser);
+  const API = process.env.REACT_APP_API_URL || '';
 
   const parsedCustomAmount = Number(customAmount);
   const currentAmount =
@@ -64,7 +65,7 @@ export function DonatePage() {
   useEffect(() => {
     const fetchCase = async () => {
       try {
-        const res = await axios.get(`/api/cases/${id}`);
+        const res = await axios.get(`${API}/api/cases/${id}`);
         setCaseData(res.data || dummyData);
         //if(currentUser?._id === res.data?.createdBy ) navigate('/');
 
@@ -82,7 +83,7 @@ export function DonatePage() {
   async function donate(caseId, caseTitle, userId, amount) {
     try {
       const res = await axios.post(
-        "/api/payment/checkout",
+        `${API}/api/payment/checkout`,
         { caseId, caseTitle, userId, amount }
       );
 

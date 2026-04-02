@@ -21,6 +21,7 @@ export function ProfilePage() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const API = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
     if (!currentUser) {
@@ -36,7 +37,7 @@ export function ProfilePage() {
       );
     const fetchCases = async () => {
       try {
-        const res = await axios.get("/api/cases/my-cases", {
+        const res = await axios.get(`${API}/api/cases/my-cases`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

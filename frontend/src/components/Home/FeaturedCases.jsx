@@ -42,6 +42,7 @@ export function FeaturedCases() {
   const navigate = useNavigate();
   const [cases, setCases] = useState([]);
   const [loading, setLoading] = useState(true)
+  const API = process.env.REACT_APP_API_URL || '';
 
   const goToCases = () => {
     navigate('/cases');
@@ -51,7 +52,7 @@ export function FeaturedCases() {
   {
     const fetchCases = async () => {
       try {
-        const res = await axios.get("/api/cases");
+        const res = await axios.get(`${API}/api/cases`);
         if(!res.data || res.data.length === 0)
           setCases(dummycases);
         else if(res.data && res.data.length < 3)

@@ -17,14 +17,15 @@ const Signin = ({setIsSignInOpen, setIsSignUpOpen}) => {
     password: '',
     checkboxToggle: false,
   })
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const API = process.env.REACT_APP_API_URL || '';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const res = await axios.post("/api/auth/login", loginData);
+      const res = await axios.post(`${API}/api/auth/login`, loginData);
 
       localStorage.setItem("token", res.data.token);
       dispatch(setUser(res.data.user));
