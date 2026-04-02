@@ -27,7 +27,7 @@ export default function AddCase() {
     setSummary("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/ai/summarize", {
+      const res = await fetch("/api/ai/summarize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, description })

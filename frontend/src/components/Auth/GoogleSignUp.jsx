@@ -7,7 +7,7 @@ const GoogleSignUp = () => {
   
     const handleSignIn = () => {
       setLoading(true);
-      window.location.href = "http://localhost:5000/api/google/google";
+      window.location.href = "https://donate-smart-project.onrender.com/api/google/google";
     };
 
   return (
