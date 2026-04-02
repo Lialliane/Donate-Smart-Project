@@ -83,7 +83,7 @@ export function AllCases() {
       try {
         const res = await axios.get("/api/cases");
         let activeCases = res.data;
-        //console.log(res.data);
+        console.log(res.data);
         if(currentUser && currentUser.role !== "admin")
           activeCases = res.data.filter(c => c.donations < c.goal);
         if(!activeCases || activeCases.length === 0)
@@ -92,6 +92,7 @@ export function AllCases() {
           setCases(activeCases);
       } catch (err) {
         setCases(allCasesDummy);
+        console.log(cases);
         console.error("Error fetching cases:", err.response, err.response?.data || err.message);
       }
       finally {
@@ -119,6 +120,8 @@ export function AllCases() {
 
       setVisibleCount(6);
     }
+    console.log(cases);
+    console.log(filteredCases);
   }, [cases, searchTerm, selectedCategory]);
 
   return (
@@ -178,7 +181,7 @@ export function AllCases() {
               )))
             :
             (<div className="text-center py-20">
-              <p className="text-[var(--color-text-light)] text-lg text-center">No cases found matching your search criteria.</p>
+              <p className="text-[var(--color-text-light)] text-lg text-center">No cases found.</p>
             </div>)
           }
         </div>
@@ -192,13 +195,6 @@ export function AllCases() {
             </button>
           </div>
         )}
-
-        {/* No Results
-        {filteredCases.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-[var(--color-text-light)] text-lg">No cases found matching your search criteria.</p>
-          </div>
-        )} */}
       </div>
     </div>
   );
